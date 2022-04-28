@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # 3rd Party
     'debug_toolbar',
     'rest_framework',
+    'mptt',
 ]
 
 MIDDLEWARE = [
