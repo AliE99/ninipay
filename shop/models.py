@@ -8,6 +8,9 @@ from mptt.models import MPTTModel, TreeForeignKey
 class Brand(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 
 class Category(MPTTModel):
     name = models.CharField(max_length=200)
@@ -16,6 +19,12 @@ class Category(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ['name']
+
+    class Meta:
+        verbose_name_plural = 'categories'
+
+    def __str__(self):
+        return self.name
 
 
 class BabyProduct(models.Model):
@@ -30,15 +39,30 @@ class BabyProduct(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name='products')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
 
+    def __str__(self):
+        return self.title
+
 
 class Food(BabyProduct):
     expiration_date = models.DateField()
+
+    def __str__(self):
+        return self.title
 
 
 class Cloths(BabyProduct):
     min_size = models.IntegerField()
     max_size = models.IntegerField()
 
+    def __str__(self):
+        return self.title
+
 
 class Accessory(BabyProduct):
     colors = ArrayField(models.CharField(max_length=15))
+
+    class Meta:
+        verbose_name_plural = 'Accessories'
+
+    def __str__(self):
+        return self.title
