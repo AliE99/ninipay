@@ -6,12 +6,13 @@ from .serializers import FoodSerializer, ClothsSerializer, AccessorySerializer
 
 # Create your views here.
 class FoodViewSet(ModelViewSet):
-    queryset = Food.objects.all()
+    queryset = Food.custom_objects.get_brand_or_category(brand='Maz Maz')
+    # queryset = Food.custom_objects.get_foods(brand='Zara')
     serializer_class = FoodSerializer
 
 
 class ClothsViewSet(ModelViewSet):
-    queryset = Cloths.objects.all()
+    queryset = Cloths.custom_objects.get_brand_or_category(brand='Zara', category='hat')
     serializer_class = ClothsSerializer
 
 
